@@ -3,7 +3,6 @@ package logger
 import (
 	"github.com/natefinch/lumberjack"
 	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 )
 
 func Configure(file string, maxsize, maxbackups, maxage int, compress bool, timefield string) {
