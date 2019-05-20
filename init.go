@@ -7,7 +7,6 @@ import (
 
 	"github.com/natefinch/lumberjack"
 	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 )
 
 var (

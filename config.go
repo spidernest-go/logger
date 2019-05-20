@@ -6,7 +6,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-func Configure(file string, maxsize, maxbackups, maxage int32, compress bool, timefield string) {
+func Configure(file string, maxsize, maxbackups, maxage int, compress bool, timefield string) {
 	zerolog.TimeFieldFormat = timefield
 	l = zerolog.New(&lumberjack.Logger{
 		Filename:   file,
