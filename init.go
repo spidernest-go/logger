@@ -3,7 +3,9 @@ package logger
 import (
 	"os"
 	"runtime"
+	"time"
 
+	"github.com/natefinch/lumberjack"
 	"github.com/rs/zerolog"
 )
 
@@ -26,5 +28,11 @@ func init() {
 
 	// Allocate a new logger
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnixMs
-	DefaultFileOutput()
+	l = zerolog.New(&lumberjack.Logger{
+		Filename:   appdir + defdir + os.Args[0] + time.Now().UTC().String() + ".log",
+		MaxSize:    128,
+		MaxBackups: 3,
+		MaxAge:     1,
+		Compress:   true,
+	}).With().Timestamp().Logger()
 }
