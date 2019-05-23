@@ -12,6 +12,7 @@ import (
 var (
 	l      zerolog.Logger
 	appdir string
+	defdir string
 )
 
 func init() {
@@ -19,14 +20,16 @@ func init() {
 	switch runtime.GOOS {
 	case "windows":
 		appdir = os.Getenv("APPDATA")
+		defdir = "\\default\\"
 	default:
 		appdir = "/var/log"
+		defdir = "/default/"
 	}
 
 	// Allocate a new logger
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnixMs
 	l = zerolog.New(&lumberjack.Logger{
-		Filename:   appdir + "/default/" + os.Args[0] + time.Now().UTC().String() + ".log",
+		Filename:   appdir + defdir + os.Args[0] + time.Now().UTC().String() + ".log",
 		MaxSize:    128,
 		MaxBackups: 3,
 		MaxAge:     1,
