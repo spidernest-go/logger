@@ -1,6 +1,9 @@
 package logger
 
 import (
+	"os"
+	"time"
+
 	"github.com/natefinch/lumberjack"
 	"github.com/rs/zerolog"
 )
@@ -20,5 +23,23 @@ func Configure(file string, maxsize, maxbackups, maxage int, compress bool, time
 		MaxBackups: maxbackups,
 		MaxAge:     maxage,
 		Compress:   compress,
+	}).With().Timestamp().Logger()
+}
+
+func StdOutput() {
+	l = zerolog.New(os.Stdout).
+		With().
+		Timestamp().
+		Logger()
+	l.Info().Msg("Testing Stdout")
+}
+
+func DefaultOutput() {
+	l = zerolog.New(&lumberjack.Logger{
+		Filename:   appdir + defdir + os.Args[0] + time.Now().UTC().String() + ".log",
+		MaxSize:    128,
+		MaxBackups: 3,
+		MaxAge:     1,
+		Compress:   true,
 	}).With().Timestamp().Logger()
 }
