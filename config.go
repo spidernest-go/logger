@@ -5,6 +5,13 @@ import (
 	"github.com/rs/zerolog"
 )
 
+// Configure takes logging parameters and allows custom parameters.
+// file: 		Filepath to where the logging file is saved.
+// maxsize: 	Size of the file allowed in megabytes.
+// maxbackups: 	Maximum allowed backups of a single log file.
+// maxage:		Maximum allowed age of a log file.
+// compress:	Compress the logfile?
+// timefield: 	zerolog time format
 func Configure(file string, maxsize, maxbackups, maxage int, compress bool, timefield string) {
 	zerolog.TimeFieldFormat = timefield
 	l = zerolog.New(&lumberjack.Logger{
