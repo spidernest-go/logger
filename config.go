@@ -30,5 +30,4 @@ func Stdout() {
 		With().
 		Timestamp().
 		Logger()
-	l.Info().Msg("Testing Stdout")
 }
