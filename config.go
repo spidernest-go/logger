@@ -25,6 +25,10 @@ func Configure(file string, maxsize, maxbackups, maxage int, compress bool, time
 	}).With().Timestamp().Logger()
 }
 
+func Logger() zerolog.Logger {
+	return l
+}
+
 func Stdout() {
 	l = zerolog.New(os.Stdout).
 		With().
